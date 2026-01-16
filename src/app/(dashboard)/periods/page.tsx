@@ -1,11 +1,10 @@
+import PeriodViewManagement from "@/features/period-management/views";
+import { session } from "@/lib/settings";
+
 const PeriodsPage = () => {
-  return (
-    <div>
-      <div className="h-screen">PeriodsPage</div>
-      <div className="h-screen">PeriodsPage</div>
-      <div className="h-screen">PeriodsPage</div>
-    </div>
-  )
+  const { user } = session;
+
+  if (user.roleType === "ADMIN") return <PeriodViewManagement role={user.roleType} />
 }
 
 export default PeriodsPage;
