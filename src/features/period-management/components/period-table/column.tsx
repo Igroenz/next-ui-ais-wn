@@ -8,7 +8,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Button } from "@/components/ui/button";
 import { Edit, MoreVertical, Trash } from "lucide-react";
 
-const PeriodColumn = (role: string): ColumnDef<AcademicPeriod>[] => {
+interface PeriodColumnProps {
+  role: string;
+  onEdit: (data: Partial<AcademicPeriod>) => void;
+  onDelete: (id: string) => void;
+};
+
+const PeriodColumn = ({ role, onEdit, onDelete }: PeriodColumnProps): ColumnDef<AcademicPeriod>[] => {
   const visibility = periodColumnVisibility[role as keyof typeof periodColumnVisibility];
   const columns: ColumnDef<AcademicPeriod>[] = [];
 
@@ -48,13 +54,13 @@ const PeriodColumn = (role: string): ColumnDef<AcademicPeriod>[] => {
             <DropdownMenuContent className="w-24" align="end">
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" onClick={() => onEdit(row.original)}>
                     <Edit />
                     Edit
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Button variant="ghost" size="sm" className="text-red-700">
+                  <Button variant="ghost" size="sm" className="text-red-700" onClick={() => onDelete(row.original.id)}>
                     <Trash className="text-red-600" />
                     Hapus
                   </Button>

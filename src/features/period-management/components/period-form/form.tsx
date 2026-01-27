@@ -2,43 +2,64 @@ import { Controller, useForm } from "react-hook-form";
 import { academicPeriodFormSchema, AcademicPeriodFormValues } from "../../schema";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { academicState, semesterType } from "@/lib/settings";
 import { Button } from "@/components/ui/button";
 import { AcademicPeriod, AcademicState, SemesterType } from "../../types";
+import { useEffect } from "react";
 
 type PeriodFormProps = {
   onSubmit: (data: Omit<AcademicPeriod, "id" | "created_at" | "updated_at">) => void,
   onCancel: () => void,
+  defaultValues?: Partial<AcademicPeriod>,
 };
 
 const PeriodForm = ({
   onSubmit,
   onCancel,
+  defaultValues,
 }: PeriodFormProps) => {
 
   const form = useForm<AcademicPeriodFormValues>({
     resolver: zodResolver(academicPeriodFormSchema),
     defaultValues: {
       id: "",
-      year: "",
-      semester_type: "",
-      academic_state: "PLANNING",
+      year: defaultValues?.year || 0,
+      semester_type: defaultValues?.semester_type || "",
+      academic_state: defaultValues?.academic_state || "PLANNING",
     },
   });
 
+  // Update form when defaultValues changes (for edit mode)
+  useEffect(() => {
+    if (defaultValues) {
+      form.reset({
+        id: defaultValues.id || "",
+        year: defaultValues.year || 0,
+        semester_type: defaultValues.semester_type || "",
+        academic_state: defaultValues.academic_state || "PLANNING",
+      });
+    } else {
+      form.reset({
+        id: "",
+        year: 0,
+        semester_type: "",
+        academic_state: "PLANNING",
+      });
+    }
+  }, [defaultValues, form]);
+
   function onSubmitForm(data: AcademicPeriodFormValues) {
     const formData = {
-      year: parseInt(data.year),
+      year: data.year,
       semester_type: data.semester_type as SemesterType,
       academic_state: data.academic_state as AcademicState,
     }
     onSubmit(formData);
   };
-  // /${currentYear - 10 + i + 1}
+
   const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 21 }, (_, i) => `${currentYear - 10 + i}`);
+  const years = Array.from({ length: 21 }, (_, i) => ({ value: currentYear - 10 + i, label: `${currentYear - 10 + i}/${currentYear - 10 + i + 1}` }));
 
   return (
     <form
@@ -57,8 +78,8 @@ const PeriodForm = ({
               </FieldLabel>
               <Select
                 name={field.name}
-                value={field.value}
-                onValueChange={field.onChange}
+                value={String(field.value)}
+                onValueChange={(val) => field.onChange(Number(val))}
                 required
               >
                 <SelectTrigger
@@ -69,7 +90,7 @@ const PeriodForm = ({
                 </SelectTrigger>
                 <SelectContent>
                   {years.map((year) => (
-                    <SelectItem value={year} key={year}>{year}</SelectItem>
+                    <SelectItem value={String(year.value)} key={year.value}>{year.label}</SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -123,7 +144,6 @@ const PeriodForm = ({
                 name={field.name}
                 value={field.value}
                 onValueChange={field.onChange}
-                defaultValue={field.value || "PLANNING"}
                 required
               >
                 <SelectTrigger
@@ -150,11 +170,8 @@ const PeriodForm = ({
           <Button size="sm" type="button" variant="outline" onClick={onCancel}>
             Batal
           </Button>
-          {/* <Button size="sm" type="button" variant="outline" onClick={() => form.reset()}>
-            Reset
-          </Button> */}
           <Button size="sm" type="submit" form="form-periods">
-            Submit
+            Simpan
           </Button>
         </Field>
       </FieldGroup>

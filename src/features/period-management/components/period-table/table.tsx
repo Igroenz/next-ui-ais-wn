@@ -11,9 +11,11 @@ import { Button } from "@/components/ui/button";
 interface PeriodTableProps {
   data: AcademicPeriod[];
   role: string;
+  onEdit: (data: Partial<AcademicPeriod>) => void;
+  onDelete: (id: string) => void;
 }
 
-const PeriodTable = ({ data, role }: PeriodTableProps) => {
+const PeriodTable = ({ data, role, onEdit, onDelete }: PeriodTableProps) => {
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 5,
@@ -21,7 +23,11 @@ const PeriodTable = ({ data, role }: PeriodTableProps) => {
 
   const table = useReactTable({
     data,
-    columns: PeriodColumn(role as keyof typeof periodColumnVisibility),
+    columns: PeriodColumn({
+      role: role as keyof typeof periodColumnVisibility,
+      onEdit: onEdit,
+      onDelete: onDelete,
+    }),
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onPaginationChange: setPagination,

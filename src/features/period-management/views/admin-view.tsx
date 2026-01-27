@@ -9,10 +9,70 @@ import { periodUI } from "../policy";
 import { useState } from "react";
 import AppDialog from "@/components/shared/app-dialog";
 import PeriodForm from "../components/period-form/form";
+import { AcademicPeriod } from "../types";
 
 const AdminPeriodView = () => {
   const [openDialogForm, setOpenDialogForm] = useState<boolean>(false);
-  const { periods, createPeriod } = usePeriods();
+  const [openDialogDelete, setOpenDialogDelete] = useState<boolean>(false);
+  const [selectedPeriod, setSelectedPeriod] = useState<Partial<AcademicPeriod> | null>(null);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
+  const { periods, createPeriod, updatePeriod, deletePeriod } = usePeriods();
+
+  const handleEdit = (data: Partial<AcademicPeriod>) => {
+    console.log(data);
+
+    setSelectedPeriod(data);
+    setIsEditMode(true);
+    setOpenDialogForm(true);
+  };
+
+  const handleDelete = (id: string) => {
+    const period = periods.find(p => p.id === id);
+    if (period) {
+      setSelectedPeriod(period);
+      setOpenDialogDelete(true);
+    }
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedPeriod) {
+      try {
+        deletePeriod("ADMIN", selectedPeriod.id!);
+        setOpenDialogDelete(false);
+        setSelectedPeriod(null);
+      } catch (error) {
+        console.error("Delete failed:", error);
+      }
+    }
+  };
+
+  const handleSubmit = (data: Omit<AcademicPeriod, "id" | "created_at" | "updated_at">) => {
+    try {
+      if (selectedPeriod && isEditMode) {
+        updatePeriod("ADMIN", selectedPeriod.id!, data);
+      } else {
+        createPeriod("ADMIN", data);
+      }
+      setOpenDialogForm(false);
+      setSelectedPeriod(null);
+      setIsEditMode(false);
+    } catch (error) {
+      console.error("Submit failed:", error);
+    }
+  };
+
+  const handleCreateNew = () => {
+    setSelectedPeriod(null);
+    setIsEditMode(false);
+    setOpenDialogForm(true);
+  };
+
+  const handleCancelForm = () => {
+    setOpenDialogForm(false);
+    setSelectedPeriod(null);
+    setIsEditMode(false);
+  };
 
   return (
     <div className="bg-white p-4 lg:p-6 rounded-md flex-1 m-4 lg:mt-16 space-y-6">
@@ -25,28 +85,59 @@ const AdminPeriodView = () => {
             <Button variant="secondary" size="sm" className="h-9 w-9 rounded-full">
               <Filter />
             </Button>
-            <ButtonCreate role="ADMIN" feature={periodUI} onCreate={() => setOpenDialogForm(true)} />
+            <ButtonCreate role="ADMIN" feature={periodUI} onCreate={handleCreateNew} />
           </div>
         </div>
       </div>
 
       {/* DataTable */}
-      <PeriodTable role="ADMIN" data={periods} />
+      <PeriodTable
+        role="ADMIN"
+        data={periods}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
+      />
 
-      {/* Form Create */}
+      {/* Form Dialog */}
       <AppDialog
-        title={"Tambah Periode Akademik"}
+        title={isEditMode ? "Edit Periode Akademik" : "Tambah Periode Akademik"}
         open={openDialogForm}
         onOpenChange={setOpenDialogForm}
-
       >
         <PeriodForm
-          onSubmit={(data) => {
-            createPeriod("ADMIN", data)
-            setOpenDialogForm(false)
-          }}
-          onCancel={() => setOpenDialogForm(false)}
+          defaultValues={selectedPeriod ?? undefined}
+          onSubmit={handleSubmit}
+          onCancel={handleCancelForm}
         />
+      </AppDialog>
+
+      {/* Delete Confirmation Dialog */}
+      <AppDialog
+        title="Konfirmasi Hapus"
+        open={openDialogDelete}
+        onOpenChange={setOpenDialogDelete}
+      >
+        <div className="space-y-4">
+          <p className="text-sm text-gray-600">
+            Apakah Anda yakin ingin menghapus periode akademik <strong>{selectedPeriod?.semester_type} {selectedPeriod?.year}/{selectedPeriod?.year ? selectedPeriod.year + 1 : ''}</strong>?
+          </p>
+          <div className="flex gap-2 justify-end">
+            <Button
+              size="sm"
+              variant="outline"
+              onClick={() => setOpenDialogDelete(false)}
+            >
+              Batal
+            </Button>
+            <Button
+              size="sm"
+              variant="destructive"
+              onClick={handleConfirmDelete}
+            >
+              Hapus
+            </Button>
+          </div>
+        </div>
       </AppDialog>
     </div>
   )
