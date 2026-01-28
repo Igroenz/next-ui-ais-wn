@@ -5,4 +5,4 @@ export const periodPermissions : {[key: string]: string[]} = {
 export const canAccessPeriodResource = (
   role: keyof typeof periodPermissions,
   action: string,
-) => periodPermissions[role]?.includes(action)
+): boolean => periodPermissions[role]?.includes(action)
