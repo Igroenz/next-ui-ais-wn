@@ -21,9 +21,6 @@
   //         onCancel = { onCancel }
   //       />
   //     );
-      
-      
-
   //     expect(screen.getByLabelText(/Tahun Akademik/i)).toBeInTheDocument();
   //     expect(screen.getByLabelText(/Tipe Semester/i)).toBeInTheDocument();
   //     expect(screen.getByLabelText(/Status Period Academic/i)).toBeInTheDocument();
