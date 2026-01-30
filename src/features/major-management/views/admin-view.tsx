@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
 import { majorUI } from "../policy";
 import { useState } from "react";
-import { Major } from "../types";
 import MajorTable from "../components/major-table/table";
 import { useMajors } from "../hooks/useMajors";
 import AppDialog from "@/components/shared/app-dialog";
 import MajorForm from "../components/major-form/form";
+import { Major } from "@/lib/types";
 
 const AdminMajorView = () => {
 

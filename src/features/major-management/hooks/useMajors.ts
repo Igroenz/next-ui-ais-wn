@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react"
-import { Major } from "../types"
 import { dataMajor } from "@/lib/data-dummy";
+import { Major } from "@/lib/types";
 
 export const useMajors = () => {
   const [majors, setMajors] = useState<Major[]>(dataMajor)

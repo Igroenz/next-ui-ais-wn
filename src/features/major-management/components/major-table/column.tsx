@@ -1,9 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { majorColumnVisibility } from "../../policy";
-import { Major } from "../../types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Edit, MoreVertical, Trash } from "lucide-react";
+import { Major } from "@/lib/types";
 
 interface MajorColumnProps {
   role: string;

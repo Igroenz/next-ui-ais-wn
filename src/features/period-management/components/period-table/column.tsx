@@ -2,11 +2,11 @@
 
 import { periodColumnVisibility } from "../../policy";
 import { ColumnDef } from "@tanstack/react-table";
-import { AcademicPeriod, AcademicState } from "../../types";
 import { cn } from "@/lib/utils";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Edit, MoreVertical, Trash } from "lucide-react";
+import { AcademicPeriod, ACADEMICSTATE } from "@/lib/types";
 
 interface PeriodColumnProps {
   role: string;
@@ -30,9 +30,9 @@ const PeriodColumn = ({ role, onEdit, onDelete }: PeriodColumnProps): ColumnDef<
         <div
           className={cn(
             "text-[10px] font-medium text-black py-1 px-2 rounded-full w-fit",
-            row.original.academic_state === AcademicState.PLANNING && "bg-yellow-500/60",
-            row.original.academic_state === AcademicState.ONGOING && "bg-green-500/60",
-            row.original.academic_state === AcademicState.CLOSE && "bg-red-500/60",
+            row.original.academic_state === ACADEMICSTATE.PLANNING && "bg-yellow-500/60",
+            row.original.academic_state === ACADEMICSTATE.ONGOING && "bg-green-500/60",
+            row.original.academic_state === ACADEMICSTATE.CLOSE && "bg-red-500/60",
           )}
         >{row.original.academic_state}</div>
       </div>

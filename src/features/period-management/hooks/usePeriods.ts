@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AcademicPeriod } from "../types";
 import { dataPeriod } from "@/lib/data-dummy";
 import { canAccessPeriodResource } from "../policy";
+import { AcademicPeriod } from "@/lib/types";
 // import { periodService } from "../services";
 
 export const usePeriods = () => {

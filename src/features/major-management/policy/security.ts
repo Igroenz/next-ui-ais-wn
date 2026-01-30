@@ -1,5 +1,3 @@
-import { Miss_Fajardose } from "next/font/google"
-
 export const majorPermission = {
   ADMIN: ["view", "create", "edit", "delete"]
 }

@@ -1,11 +1,11 @@
 import { Controller, useForm } from "react-hook-form";
-import { DEGREE, Major } from "../../types";
 import { majorFormSchema, MajorFormValues } from "../../schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { degree } from "@/lib/settings";
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DEGREE, Major } from "@/lib/types";
 
 interface MajorFormProps {
   onSubmit: (data: Omit<Major, "id" | "created_at" | "updated_at" | "deleted_at">) => void;

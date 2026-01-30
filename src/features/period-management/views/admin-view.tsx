@@ -9,7 +9,7 @@ import { periodUI } from "../policy";
 import { useState } from "react";
 import AppDialog from "@/components/shared/app-dialog";
 import PeriodForm from "../components/period-form/form";
-import { AcademicPeriod } from "../types";
+import { AcademicPeriod } from "@/lib/types";
 
 const AdminPeriodView = () => {
   const [openDialogForm, setOpenDialogForm] = useState<boolean>(false);

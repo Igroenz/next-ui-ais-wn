@@ -5,8 +5,8 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { academicState, semesterType } from "@/lib/settings";
 import { Button } from "@/components/ui/button";
-import { AcademicPeriod, AcademicState, SemesterType } from "../../types";
 import { useEffect } from "react";
+import { AcademicPeriod, ACADEMICSTATE, SEMESTERTYPE } from "@/lib/types";
 
 type PeriodFormProps = {
   onSubmit: (data: Omit<AcademicPeriod, "id" | "created_at" | "updated_at">) => void,
@@ -52,8 +52,8 @@ const PeriodForm = ({
   function onSubmitForm(data: AcademicPeriodFormValues) {
     const formData = {
       year: data.year,
-      semester_type: data.semester_type as SemesterType,
-      academic_state: data.academic_state as AcademicState,
+      semester_type: data.semester_type as SEMESTERTYPE,
+      academic_state: data.academic_state as ACADEMICSTATE,
     }
     onSubmit(formData);
   };

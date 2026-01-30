@@ -1,12 +1,12 @@
 "use client";
 
 import { flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from "@tanstack/react-table";
-import { AcademicPeriod } from "../../types";
 import PeriodColumn from "./column";
 import { periodColumnVisibility } from "../../policy";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { AcademicPeriod } from "@/lib/types";
 
 interface PeriodTableProps {
   data: AcademicPeriod[];

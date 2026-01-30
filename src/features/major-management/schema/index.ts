@@ -1,5 +1,4 @@
 import z from "zod";
-import { DEGREE } from "../types";
 import { degree } from "@/lib/settings";
 
 export const majorFormSchema = z.object({

@@ -1,7 +1,7 @@
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
-import { Major } from "../../types";
 import MajorColumn from "./column";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Major } from "@/lib/types";
 
 interface MajorTableProps {
   data: Major[];
