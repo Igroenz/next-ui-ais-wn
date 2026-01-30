@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { majorColumnVisibility } from "../../policy/ui";
+import { majorColumnVisibility } from "../../policy";
 import { Major } from "../../types";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";

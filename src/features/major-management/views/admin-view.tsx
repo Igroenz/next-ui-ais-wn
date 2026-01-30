@@ -3,7 +3,7 @@
 import ButtonCreate from "@/components/shared/button-create";
 import { Button } from "@/components/ui/button";
 import { Filter } from "lucide-react";
-import { majorUI } from "../policy/ui";
+import { majorUI } from "../policy";
 import { useState } from "react";
 import { Major } from "../types";
 import MajorTable from "../components/major-table/table";
