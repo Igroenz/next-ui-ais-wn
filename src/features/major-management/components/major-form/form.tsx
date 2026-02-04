@@ -6,6 +6,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DEGREE, Major } from "@/lib/types";
+import { Button } from "@/components/ui/button";
 
 interface MajorFormProps {
   onSubmit: (data: Omit<Major, "id" | "created_at" | "updated_at" | "deleted_at">) => void;
@@ -114,6 +115,16 @@ const MajorForm = ({
             </Field>
           )}
         />
+      </FieldGroup>
+      <FieldGroup>
+        <Field orientation="horizontal">
+          <Button size="sm" type="button" variant="outline" onClick={onCancel}>
+            Batal
+          </Button>
+          <Button size="sm" type="submit" form="form-major">
+            Simpan
+          </Button>
+        </Field>
       </FieldGroup>
     </form>
   )
