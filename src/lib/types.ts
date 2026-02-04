@@ -5,7 +5,7 @@ export interface AcademicPeriod {
   academic_state: ACADEMICSTATE,
   created_at: Date,
   updated_at: Date,
-}
+};
 
 export interface Major {
   id: string,
@@ -15,6 +15,39 @@ export interface Major {
   created_at: Date,
   updated_at: Date,
   deleted_at?: Date,
+};
+
+export interface User {
+  id: string,
+  name: string,
+  email: string,
+  username: string,
+  password?: string,
+  created_at: Date,
+  updated_at: Date,
+};
+
+export interface Operator {
+  id: string,
+  name: string,
+  employee_id: string,
+  department: string,
+  role: ROLES,
+  userId?: string,
+  created_at: Date,
+  updated_at: Date,
+};
+
+export type OperatorWithUser = Operator & { user?: User };
+
+export enum ROLES {
+  ADMIN = 'ADMIN',
+  PRODI = 'PRODI',
+  FINANCE = 'FINANCE',
+  BAAK = 'BAAK',
+  LECTURER = 'LECTURER',
+  ADVISOR = 'ADVISOR',
+  STUDENT = 'STUDENT',
 }
 
 export enum DEGREE {
@@ -34,5 +67,5 @@ export enum SEMESTERTYPE {
 export enum ACADEMICSTATE {
   PLANNING = 'PLANNING',
   ONGOING = 'ONGOING',
-  CLOSE = "CLOSE",
+  CLOSE = 'CLOSE',
 }
