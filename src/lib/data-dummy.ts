@@ -1,4 +1,4 @@
-import { ACADEMICSTATE, DEGREE, ROLES, SEMESTERTYPE } from "./types";
+import { ACADEMICSTATE, DEGREE, GENDER, ROLES, SEMESTERTYPE } from "./types";
 
 export const dataPeriod = [
   {
@@ -84,5 +84,58 @@ export const dataOperator = [
     userId: "baak1",
     created_at: new Date(2026, 0, 10, 0, 0, 0),
     updated_at: new Date(2026, 0, 10, 0, 0, 0),
+  },
+];
+
+export const dataLecturer = [
+  {
+    id: "1",
+    name: "Sapere aude, M.Kom",
+    employee_id: '098.1235.123',
+    gender: GENDER.PRIA,
+    degree: DEGREE.S2,
+    entryYear: '2008',
+    email: undefined,
+    phone: undefined,
+    avatar: undefined,
+    majorId: '1',
+    major: {
+      id: "1",
+      code: "SI",
+      name: "Sistem Informasi",
+      degree: DEGREE.S1,
+      created_at: new Date(2026, 0, 10, 0, 0, 0),
+      updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    },
+    role: ROLES.LECTURER,
+    userId: 'lecturer1',
+    created_at: new Date(2026, 0, 10, 0, 0, 0),
+    updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    deleted_at: undefined,
+  },
+  {
+    id: "2",
+    name: "Chasiah Mikami, M.Kom, PhD",
+    employee_id: '098.1244.124',
+    gender: GENDER.WANITA,
+    degree: DEGREE.S3,
+    entryYear: '2007',
+    email: undefined,
+    phone: undefined,
+    avatar: undefined,
+    majorId: '2',
+    major: {
+      id: "2",
+      code: "TI",
+      name: "Teknik Informatika",
+      degree: DEGREE.S1,
+      created_at: new Date(2026, 0, 10, 0, 0, 0),
+      updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    },
+    role: ROLES.ADVISOR,
+    userId: 'advisor1',
+    created_at: new Date(2026, 0, 10, 0, 0, 0),
+    updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    deleted_at: undefined,
   },
 ];
