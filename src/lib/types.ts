@@ -40,6 +40,26 @@ export interface Operator {
 
 export type OperatorWithUser = Operator & { user?: User };
 
+export interface Lecturer {
+  id: string,
+  name: string,
+  employee_id: string,
+  gender: GENDER,
+  degree: DEGREE,
+  entryYear: string,
+  email?: string,
+  phone?: string,
+  avatar?: string,
+  majorId: string,
+  role: ROLES,
+  userId?: string,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export type LecturerWithUserAndMajor = Lecturer & { user?: User } & { major?: Major }
+
 export enum ROLES {
   ADMIN = 'ADMIN',
   PRODI = 'PRODI',
@@ -48,6 +68,11 @@ export enum ROLES {
   LECTURER = 'LECTURER',
   ADVISOR = 'ADVISOR',
   STUDENT = 'STUDENT',
+}
+
+export enum GENDER {
+  PRIA = "PRIA",
+  WANITA = "WANITA",
 }
 
 export enum DEGREE {

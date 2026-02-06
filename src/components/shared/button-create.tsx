@@ -14,7 +14,7 @@ type AdminProps = BaseProps & {
 };
 
 type NonAdminProps = BaseProps & {
-  onCreate?: never,
+  onCreate?: () => void,
 };
 
 type ButtonCreateProps = AdminProps | NonAdminProps;
