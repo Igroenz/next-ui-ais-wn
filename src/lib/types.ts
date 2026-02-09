@@ -1,3 +1,6 @@
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 export interface AcademicPeriod {
   id: string,
   year: number,
@@ -123,3 +126,29 @@ export enum REGISTERSTATUS {
   RENIM = 'RENIM',
   CREDIT_ACQUISITION = 'CREDIT_ACQUISITION'
 }
+
+// Types Feature
+export interface featureMeta {
+  key: string;
+  order: number;
+  route: string;
+  icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  label: {
+      [key: string]: string;
+  };
+  permission: {
+      [key: string]: string[];
+  };
+  nested?: {
+    key: string;
+    order: number;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+    route: string;
+    label: {
+      [key: string]: string;
+    };
+    permission: {
+      [key: string]: string[];
+    };
+  }[];
+};
