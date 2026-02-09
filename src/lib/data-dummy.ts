@@ -1,4 +1,4 @@
-import { ACADEMICSTATE, DEGREE, GENDER, ROLES, SEMESTERTYPE } from "./types";
+import { ACADEMICSTATE, DEGREE, GENDER, REGISTERSTATUS, ROLES, SEMESTERTYPE } from "./types";
 
 export const dataPeriod = [
   {
@@ -134,6 +134,63 @@ export const dataLecturer = [
     },
     role: ROLES.ADVISOR,
     userId: 'advisor1',
+    created_at: new Date(2026, 0, 10, 0, 0, 0),
+    updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    deleted_at: undefined,
+  },
+];
+
+export const dataStudent = [
+  {
+    id: "1",
+    name: "Hayami Liora",
+    nim: "310126012001",
+    gender: GENDER.WANITA,
+    entryYear: "2026",
+    register_status: REGISTERSTATUS.NEW,
+    place_of_birth: "Banjarmasin",
+    birthday: new Date(2007, 3, 11, 0, 0, 0),
+    email: "",
+    phone: "",
+    avatar: "",
+    majorId: "1",
+    major: {
+      id: "1",
+      code: "SI",
+      name: "Sistem Informasi",
+      degree: DEGREE.S1,
+      created_at: new Date(2026, 0, 10, 0, 0, 0),
+      updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    },
+    role: "STUDENT" as ROLES,
+    userId: "student1",
+    created_at: new Date(2026, 0, 10, 0, 0, 0),
+    updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    deleted_at: undefined,
+  },
+  {
+    id: "2",
+    name: "Sundreesoro Migiora",
+    nim: "310126022001",
+    gender: GENDER.PRIA,
+    entryYear: "2026",
+    register_status: REGISTERSTATUS.NEW,
+    place_of_birth: "Banjarmasin",
+    birthday: new Date(2007, 3, 11, 0, 0, 0),
+    email: "",
+    phone: "",
+    avatar: "",
+    majorId: "2",
+    major: {
+      id: "2",
+      code: "TI",
+      name: "Teknik Informatika",
+      degree: DEGREE.S1,
+      created_at: new Date(2026, 0, 10, 0, 0, 0),
+      updated_at: new Date(2026, 0, 10, 0, 0, 0),
+    },
+    role: "STUDENT" as ROLES,
+    userId: "student2",
     created_at: new Date(2026, 0, 10, 0, 0, 0),
     updated_at: new Date(2026, 0, 10, 0, 0, 0),
     deleted_at: undefined,

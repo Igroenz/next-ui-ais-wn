@@ -7,6 +7,7 @@ export const gender = ["PRIA", "WANITA"] as const;
 
 export const semesterType = ["GANJIL", "GANJIL_PENDEK", "GENAP", "GENAP_PENDEK"];
 export const academicState = ["PLANNING", "ONGOING", "CLOSE"];
+export const registerStatus = ["NEW", "CREDIT_TRANSFER", "RENIM", "CREDIT_ACQUISITION"];
 
 export const session = {
   user: {

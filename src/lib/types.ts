@@ -58,7 +58,29 @@ export interface Lecturer {
   deleted_at?: Date,
 }
 
-export type LecturerWithUserAndMajor = Lecturer & { user?: User } & { major?: Major }
+export type LecturerWithUserAndMajor = Lecturer & { user?: User } & { major?: Major };
+
+export interface Student {
+  id: string,
+  name: string,
+  nim: string,
+  gender: GENDER,
+  entryYear: string,
+  register_status: REGISTERSTATUS,
+  place_of_birth: string,
+  birthday: Date,
+  email?: string,
+  phone?: string,
+  avatar?: string,
+  majorId: string,
+  role: ROLES,
+  userId?: string,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export type StudentWithUserAndMajor = Student & { user?: User } & { major?: Major };
 
 export enum ROLES {
   ADMIN = 'ADMIN',
@@ -93,4 +115,11 @@ export enum ACADEMICSTATE {
   PLANNING = 'PLANNING',
   ONGOING = 'ONGOING',
   CLOSE = 'CLOSE',
+}
+
+export enum REGISTERSTATUS {
+  NEW = 'NEW',
+  CREDIT_TRANSFER = 'CREDIT_TRANSFER',
+  RENIM = 'RENIM',
+  CREDIT_ACQUISITION = 'CREDIT_ACQUISITION'
 }
