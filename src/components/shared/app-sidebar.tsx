@@ -7,6 +7,7 @@ import { Button } from "../ui/button";
 import { featureRegistry } from "@/features/features.registry";
 import { canAccessFeature } from "@/lib/permissions";
 import { usePathname } from "next/navigation";
+import { featureMeta } from "@/lib/types";
 
 const AppSidebar = ({ role }: { role: string }) => {
   const items = [
@@ -106,15 +107,58 @@ const AppSidebar = ({ role }: { role: string }) => {
               .map((feature) => {
                 const Icon = feature.icon;
                 const active = pathname.includes(feature.route);
+
+
                 return (
-                  <Link
-                    key={feature.key}
-                    href={feature.route}
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition bg-transparent"
-                  >
-                    <Icon className="w-5" />
-                    <span className="text-sm">{feature.label[role as keyof typeof feature.label]}</span>
-                  </Link>
+                  <div key={feature.key}>
+                    {feature.nested ? (
+                      <div>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <div className="flex items-center justify-between pl-3 py-2 test-sm">
+                              <div className="flex space-x-2">
+                                <Icon className="w-5" />
+                                <span className="text-sm">{feature.label[role as keyof typeof feature.label]}</span>
+                              </div>
+                              <Button variant="ghost" size="icon-sm">
+                                <ChevronsUpDown />
+                              </Button>
+                            </div>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent side="right" align="end">
+                            {feature.nested.map((nestedFeature: featureMeta) => {
+                              if (!canAccessFeature({ feature: nestedFeature, role: "ADMIN", action: "view" })) return null;
+                              const NestedIcon = nestedFeature.icon;
+
+                              return (
+                                <DropdownMenuItem
+                                  key={nestedFeature.key}
+                                  className=""
+                                >
+                                  <Link
+                                    href={nestedFeature.route}
+                                    className="flex items-center gap-2 rounded-md px py-1.5 text-sm transition bg-transparent"
+                                  >
+                                    {/* <NestedIcon className="w-5" /> */}
+                                    <span className="text-sm">{nestedFeature.label[role as keyof typeof nestedFeature.label]}</span>
+                                  </Link>
+                                </DropdownMenuItem>
+                              )
+                            })}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </div>
+                    ) : (
+                      <Link
+                        key={feature.key}
+                        href={feature.route}
+                        className="flex items-center gap-2 rounded-md px-3 py-2 text-sm transition bg-transparent"
+                      >
+                        <Icon className="w-5" />
+                        <span className="text-sm">{feature.label[role as keyof typeof feature.label]}</span>
+                      </Link>
+                    )}
+                  </div>
                 )
               })
             }
@@ -133,20 +177,20 @@ const AppSidebar = ({ role }: { role: string }) => {
               </div>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="right" align="end">
-              <DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-2 rounded-md px py-1.5 text-sm">
                 <span>Profil Pengguna</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-2 rounded-md px py-1.5 text-sm">
                 <span>Ubah Password</span>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-2 rounded-md px py-1.5 text-sm">
                 <span>Log out</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      </aside>
-    </div>
+      </aside >
+    </div >
   )
 }
 

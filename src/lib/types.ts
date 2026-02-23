@@ -1,3 +1,6 @@
+import { LucideProps } from "lucide-react";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+
 export interface AcademicPeriod {
   id: string,
   year: number,
@@ -82,6 +85,71 @@ export interface Student {
 
 export type StudentWithUserAndMajor = Student & { user?: User } & { major?: Major };
 
+export interface AssessmentComponent {
+  id: string,
+  name: string,
+  description?: string,
+  acronym: string,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export interface AssessmentModel {
+  id: string,
+  name: string,
+  description?: string,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export interface AssessmentModelComponent {
+  id: string,
+  assessmentModelId: string,
+  assessmentModel?: AssessmentModel,
+  assessmentComponentId: string,
+  assessmentComponent?: AssessmentComponent,
+  percentage: number,
+  sort_order: number,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export type AssessmentModelWithComponent = AssessmentModel & {
+  assessmentModelComponent?: AssessmentModelComponent[]
+}
+
+export interface CourseType {
+  id: number,
+  name: string,
+  description?: string,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export interface Course {
+  id: string,
+  code: string,
+  name: string,
+  credit: number,
+  majorId: string,
+  major?: Major,
+  assessmentModelId: string,
+  assessmentModel?: AssessmentModelWithComponent,
+  courseTypeId: number,
+  courseType?: CourseType,
+  validFrom: Date,
+  validTo?: Date,
+  predecessorId?: string,
+  predecessor?: Course,
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
 export enum ROLES {
   ADMIN = 'ADMIN',
   PRODI = 'PRODI',
@@ -123,3 +191,29 @@ export enum REGISTERSTATUS {
   RENIM = 'RENIM',
   CREDIT_ACQUISITION = 'CREDIT_ACQUISITION'
 }
+
+// Types Feature
+export interface featureMeta {
+  key: string;
+  order: number;
+  route: string;
+  icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+  label: {
+      [key: string]: string;
+  };
+  permission: {
+      [key: string]: string[];
+  };
+  nested?: {
+    key: string;
+    order: number;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+    route: string;
+    label: {
+      [key: string]: string;
+    };
+    permission: {
+      [key: string]: string[];
+    };
+  }[];
+};

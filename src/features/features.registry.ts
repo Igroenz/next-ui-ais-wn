@@ -1,3 +1,4 @@
+import { courseFeatureMeta } from "./course-management/policy";
 import { lecturerFeatureMeta } from "./lecturer-management/policy";
 import { majorFeatureMeta } from "./major-management/policy";
 import { operatorFeatureMeta } from "./operator-management/policy";
@@ -11,4 +12,5 @@ export const featureRegistry = [
   operatorFeatureMeta,
   lecturerFeatureMeta,
   studentFeatureMeta,
+  courseFeatureMeta,
 ];

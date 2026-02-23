@@ -1,7 +1,8 @@
 import { ClockFading } from "lucide-react";
 import { periodPermissions } from "./security";
+import { featureMeta } from "@/lib/types";
 
-export const periodFeatureMeta = {
+export const periodFeatureMeta: featureMeta = {
   key: 'periods',
   order: 1,
   route: '/periods',

@@ -1,7 +1,8 @@
 import { UserCog } from "lucide-react";
 import { operatorPermission } from "./security";
+import { featureMeta } from "@/lib/types";
 
-export const operatorFeatureMeta = {
+export const operatorFeatureMeta: featureMeta = {
   key: 'operators',
   order: 3,
   route: '/operators',
