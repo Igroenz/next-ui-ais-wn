@@ -139,7 +139,7 @@ const AppSidebar = ({ role }: { role: string }) => {
                                     href={nestedFeature.route}
                                     className="flex items-center gap-2 rounded-md px py-1.5 text-sm transition bg-transparent"
                                   >
-                                    {/* <NestedIcon className="w-2 h-2" /> */}
+                                    {/* <NestedIcon className="w-5" /> */}
                                     <span className="text-sm">{nestedFeature.label[role as keyof typeof nestedFeature.label]}</span>
                                   </Link>
                                 </DropdownMenuItem>
