@@ -150,6 +150,41 @@ export interface Course {
   deleted_at?: Date,
 }
 
+export interface Curriculum {
+  id: string,
+  name: string,
+  majorId: string,
+  major?: Major
+  startDate: Date,
+  endDate: Date,
+  academicPeriodId: string,
+  academicPeriod?: AcademicPeriod, 
+  created_at: Date,
+  updated_at: Date,
+  deleted_at?: Date,
+}
+
+export interface CurriculumDetail {
+  id: string,
+  curriculumId: string,
+  curriculum?: Curriculum 
+  courseId: string,
+  course?: Course,
+  semester: number,
+  created_at: Date,
+  updated_at: Date,
+}
+
+export type CurriculumWithCourse = Curriculum & {
+  curriculumDetail?: CurriculumDetail[]
+}
+
+export type CurriculumDetailFormTypes = {
+  curriculumId: string,
+  semester: number,
+  courses: string[],
+}
+
 export enum ROLES {
   ADMIN = 'ADMIN',
   PRODI = 'PRODI',
